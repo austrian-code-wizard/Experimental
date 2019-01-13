@@ -34,20 +34,22 @@ Make sure that the Pi and Mac will not be disconnected from the Hotspot from now
 #### **Analyzing Results** ####
 1. In order to analyze the results, open Cyberduck.
 2. Cick on the "+" button to create a new connection. For the connection config,
-select "SFTP". "Server: " is the Pi's IP, "Username: " is "Pi", and "Password:" is 
+select "SFTP". "Server: " is the Pi's IP, "Username: " is "pi", and "Password:" is 
 "TWdev0x%". Then click on "Connect".
 3. You will now see the Pi's file system. Open the "tumbleweed_data" folder and then
 open the Folder that is named after the test name you entered before. Right-click on the "processed_data.csv" file and select "Download".
 4. Open a second Terminal
 5. To navigate to the git repository you cloned before, enter:<br/>
 `cd Experimental`
+6. Create a new Python environment by typing: <br/>
+`python3 -m virtualenv venv`
 6. To activate Python, type:<br/>
 `. venv/bin/activate`
 7. To Download the necessary dependencies, type:<br/>
 `sudo venv/bin/python3 -m pip install -r requirements.txt` <br/>
 and wait until the download is complete.
 8. To visualize the data, now type: <br/>
-`sudo 3D_Vector_Time_Series.py "/Users/<your hostname>/Downloads/processed_data.csv"`<br/>
+`sudo venv/bin/python3 3D_Vector_Time_Series.py "/Users/<your hostname>/Downloads/processed_data.csv"`<br/>
 When you run a second test and you attempt to download the data, Cyberduck will ask you to 
 rename the new file because there's already an exisiting file with that name. You should do that,
 but then remember to change the file name in this command as well to read

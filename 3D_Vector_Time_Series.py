@@ -2,6 +2,8 @@ import numpy as np
 import sys
 import os
 import csv
+import matplotlib
+matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
 from mpl_toolkits.mplot3d import Axes3D
