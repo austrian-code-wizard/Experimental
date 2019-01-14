@@ -60,7 +60,8 @@ and wait until the download is complete.
 8. To visualize the data, now type: <br/>
 `python3 3D_Vector_Time_Series.py "/Users/<your hostname>/Downloads/processed_data.csv"`<br/>
 The Data will be displayed in a new window that you might have to find first. Also, the slider does not 
-currently work in full-screen mode.
+currently work in full-screen mode. Move the slider to scroll through the IMU data.
+The time after the beginning of the test will be displayed at the top of the window.
 When you run a second test and you attempt to download the data, Cyberduck will ask you to 
 rename the new file because there's already an exisiting file with that name. You should do that,
 but then remember to change the file name in this command as well to read

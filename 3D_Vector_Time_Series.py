@@ -5,10 +5,11 @@ import csv
 import matplotlib
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
-from matplotlib.widgets import Slider
+from matplotlib.widgets import Slider, Button
 from mpl_toolkits.mplot3d import Axes3D
 from math import cos, sin
 from datetime import datetime
+from time import sleep
 
 def euler_x(heading, roll, pitch):
 	x = cos(heading)*cos(pitch)
@@ -71,8 +72,6 @@ sfreq = Slider(axfreq, 'Freq', 1, len(arrays_x)-1, valinit=0, valstep=1)
 
 
 def update(val):
-	global arrays
-
 	data_point = int(sfreq.val)
 	ax.cla()
 	ax.quiver(arrays_x[data_point][0], arrays_x[data_point][1],arrays_x[data_point][2],arrays_x[data_point][3],
@@ -88,5 +87,14 @@ def update(val):
 	fig.canvas.set_window_title("Seconds after start: " + str(times[data_point]))
 	fig.canvas.draw_idle()
 sfreq.on_changed(update)
+
+def show_animation():
+	last_one = 0
+	for i in range(0, len(arrays_x)):
+		update(i)
+		sleep(times[i]-last_one)
+		last_one = times[i]
+
+	pass
 
 plt.show()
