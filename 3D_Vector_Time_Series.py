@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
 from mpl_toolkits.mplot3d import Axes3D
 from math import cos, sin
+from datetime import datetime
 
 def euler_x(heading, roll, pitch):
 	x = cos(heading)*cos(pitch)
@@ -38,25 +39,30 @@ reader = csv.reader(input_file)
 row = next(reader)
 arrays_x = []
 arrays_y = []
+times = []
+start_time = None
 try:
+	row = next(reader)
+	start_time = datetime.strptime(row[0], "%Y-%m-%d %H:%M:%S.%f")
 	while True:
-		row = next(reader)
-		print(row)
 		Ux, Vx, Wx = zip(euler_x(float(row[1]), float(row[2]), float(row[3])))
 		Uy, Vy, Wy = zip(euler_y(float(row[1]), float(row[2]), float(row[3])))
 		new_array_x = [X, Y, Z, Ux, Vx, Wx]
 		new_array_y = [X, Y, Z, Uy, Vy, Wy]
 		arrays_x.append(new_array_x)
 		arrays_y.append(new_array_y)
+		times.append((datetime.strptime(row[0], "%Y-%m-%d %H:%M:%S.%f")-start_time).total_seconds())
+		row = next(reader)
+
 except Exception as e:
 	print(e)
 	pass
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-ax.quiver(X,Y,Z, 0.1, 0, 0 ,arrow_length_ratio=0.01, color='red')
-ax.quiver(X,Y,Z, 0, 0.1, 0 ,arrow_length_ratio=0.01, color='blue')
-ax.quiver(X,Y,Z, 0, 0, 0.1, arrow_length_ratio=0.01, color='green')
+ax.quiver(X,Y,Z, 0.06, 0, 0 ,arrow_length_ratio=0.01, color='red')
+ax.quiver(X,Y,Z, 0, 0.06, 0 ,arrow_length_ratio=0.01, color='blue')
+ax.quiver(X,Y,Z, 0, 0, 0.06, arrow_length_ratio=0.01, color='green')
 
 axcolor = 'lightgoldenrodyellow'
 axfreq = plt.axes([0.25, 0.1, 0.65, 0.03], facecolor=axcolor)
@@ -70,15 +76,16 @@ def update(val):
 	data_point = int(sfreq.val)
 	ax.cla()
 	ax.quiver(arrays_x[data_point][0], arrays_x[data_point][1],arrays_x[data_point][2],arrays_x[data_point][3],
-			arrays_x[data_point][4],arrays_x[data_point][5], length=0.01, color='red')
+			arrays_x[data_point][4],arrays_x[data_point][5], length=0.06, color='red')
 	ax.quiver(arrays_y[data_point][0], arrays_y[data_point][1], arrays_y[data_point][2], arrays_y[data_point][3],
-			arrays_y[data_point][4], arrays_y[data_point][5], length=0.01, color='blue')
+			arrays_y[data_point][4], arrays_y[data_point][5], length=0.06, color='blue')
 	x_vector = [arrays_x[data_point][3][0], arrays_x[data_point][4][0], arrays_x[data_point][5][0]]
 	print(x_vector)
 	y_vector = [arrays_y[data_point][3][0], arrays_y[data_point][4][0], arrays_y[data_point][5][0]]
 	print(y_vector)
 	Uz, Vz, Wz = zip(cross_product(x_vector, y_vector))
-	ax.quiver(X, Y, Z, Uz, Vz, Wz, length=0.01, color='green')
+	ax.quiver(X, Y, Z, Uz, Vz, Wz, length=0.06, color='green')
+	fig.canvas.set_window_title("Seconds after start: " + str(times[data_point]))
 	fig.canvas.draw_idle()
 sfreq.on_changed(update)
 
