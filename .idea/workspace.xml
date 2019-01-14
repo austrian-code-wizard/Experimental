@@ -28,8 +28,8 @@
         <entry file="file://$PROJECT_DIR$/HOWTO_Raspi_Test.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="419">
-                <caret line="51" column="1" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
+              <first_editor relative-caret-position="383">
+                <caret line="53" column="35" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
               </first_editor>
               <second_editor />
             </state>
@@ -155,8 +155,8 @@
     <entry file="file://$PROJECT_DIR$/HOWTO_Raspi_Test.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="419">
-            <caret line="51" column="1" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
+          <first_editor relative-caret-position="383">
+            <caret line="53" column="35" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
           </first_editor>
           <second_editor />
         </state>
