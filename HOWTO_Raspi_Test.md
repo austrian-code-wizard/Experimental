@@ -5,6 +5,15 @@
 2. Download & Install Cyberduck (https://cyberduck.io/download/)
 3. Clone the Experimental repository from github. To do this, open the Mac Terminal and run:<br/>
 `git clone https://github.com/austrian-code-wizard/Experimental.git`
+4. To install Python3 on your Mac, first download Xcode command line tools by typing:<br/>
+`xcode-select --install`  <br/> 
+You may be asked for confirmation while running this. Say yes to everything.
+5. Install the Homebrew packet manager by typing: <br/>
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+6. To confirm that the install worked, type: <br/>
+`brew doctor`
+7. Now, you're finally ready to install Python3 by typing: <br/>
+`brew install python3`
 
 ##### **Before the test** ####
 (This assumes that the personal hotspot of the mobile phone used is already saved on the Raspberry Pi, so that it will connect automatically)
