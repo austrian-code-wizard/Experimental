@@ -21,6 +21,12 @@ def euler_y(heading, roll, pitch):
 	z = cos(pitch)*sin(roll)
 	return [x, y, z]
 
+def cross_product(v1, v2):
+	zx = v1[1]*v2[2]-v1[2]*v2[1]
+	zy = v1[2]*v2[0]-v1[0]*v2[2]
+	zz = v1[0]*v2[1]-v1[1]*v2[0]
+	return [zx, zy, zz]
+
 
 origin = [0,0,0]
 X, Y, Z = zip(origin,origin,origin)
@@ -48,8 +54,9 @@ except Exception as e:
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-ax.quiver(X,Y,Z, 0.1, 0, 0 ,arrow_length_ratio=0.01)
-ax.quiver(X,Y,Z, 0, 0.1, 0 ,arrow_length_ratio=0.01)
+ax.quiver(X,Y,Z, 0.1, 0, 0 ,arrow_length_ratio=0.01, color='red')
+ax.quiver(X,Y,Z, 0, 0.1, 0 ,arrow_length_ratio=0.01, color='blue')
+ax.quiver(X,Y,Z, 0, 0, 0.1, arrow_length_ratio=0.01, color='green')
 
 axcolor = 'lightgoldenrodyellow'
 axfreq = plt.axes([0.25, 0.1, 0.65, 0.03], facecolor=axcolor)
@@ -63,9 +70,15 @@ def update(val):
 	data_point = int(sfreq.val)
 	ax.cla()
 	ax.quiver(arrays_x[data_point][0], arrays_x[data_point][1],arrays_x[data_point][2],arrays_x[data_point][3],
-			  arrays_x[data_point][4],arrays_x[data_point][5], length=0.01)
+			arrays_x[data_point][4],arrays_x[data_point][5], length=0.01, color='red')
 	ax.quiver(arrays_y[data_point][0], arrays_y[data_point][1], arrays_y[data_point][2], arrays_y[data_point][3],
-			  arrays_y[data_point][4], arrays_y[data_point][5], length=0.01)
+			arrays_y[data_point][4], arrays_y[data_point][5], length=0.01, color='blue')
+	x_vector = [arrays_x[data_point][3][0], arrays_x[data_point][4][0], arrays_x[data_point][5][0]]
+	print(x_vector)
+	y_vector = [arrays_y[data_point][3][0], arrays_y[data_point][4][0], arrays_y[data_point][5][0]]
+	print(y_vector)
+	Uz, Vz, Wz = zip(cross_product(x_vector, y_vector))
+	ax.quiver(X, Y, Z, Uz, Vz, Wz, length=0.01, color='green')
 	fig.canvas.draw_idle()
 sfreq.on_changed(update)
 
